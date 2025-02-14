@@ -1,5 +1,6 @@
 package strakas.findpath;
 
+import strakas.findpath.find.MazePathFinder;
 import strakas.findpath.input.AbstractFindPathInputReader;
 import strakas.findpath.input.FindPathInputReaderFile;
 import strakas.findpath.input.FindPathInputReaderStdIn;
@@ -12,14 +13,13 @@ public class MazeSolver {
         AbstractFindPathInputReader reader;
         try {
             if (args.length > 0) {
-                // Read maze from file (first argument is the filename).
                 reader = new FindPathInputReaderFile(args[0]);
             } else {
-                // Read maze from standard input.
                 reader = new FindPathInputReaderStdIn();
             }
             Maze maze = reader.readMaze();
-            String path = MazePathFinder.findPath(maze);
+            MazePathFinder mazePathFinder = new MazePathFinder();
+            String path = mazePathFinder.findPath(maze);
 
             System.out.println("Path: " + path);
 

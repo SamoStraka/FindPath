@@ -1,11 +1,11 @@
 package strakas.findpath.input;
 
-import java.nio.file.Paths;
-import java.util.List;
 import strakas.findpath.maze.Maze;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class FindPathInputReaderFile extends AbstractFindPathInputReader {
     private final String filename;

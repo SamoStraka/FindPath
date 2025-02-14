@@ -4,27 +4,31 @@ package strakas.findpath.maze;
 import java.util.List;
 
 public class Maze {
-    private final char[][] grid;
+
+    public static final char WALL = '#';
+    private static final char START = 'S';
+    private static final char END = 'X';
+
+    private final Node[][] grid;
     private final int rows;
     private final int cols;
-    private int startRow, startCol;
-    private int targetRow, targetCol;
+    private Node startNode;
+    private Node endNode;
 
     public Maze(char[][] gridAsChar) {
-        this.grid = new char[gridAsChar.length][gridAsChar[0].length];
+        this.grid = new Node[gridAsChar.length][gridAsChar[0].length];
         this.rows = grid.length;
         this.cols = grid[0].length;
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (gridAsChar[i][j] == 'S') {
+                grid[i][j] = new Node(gridAsChar[i][j], i, j, null, ' ', Integer.MAX_VALUE);
 
-                    startRow = i;
-                    startCol = j;
+                if (gridAsChar[i][j] == START) {
+                    startNode = grid[i][j];
                 }
-                if (gridAsChar[i][j] == 'X') {
-                    targetRow = i;
-                    targetCol = j;
+                if (gridAsChar[i][j] == END) {
+                    endNode = grid[i][j];
                 }
             }
         }
@@ -42,11 +46,23 @@ public class Maze {
     }
 
     // Getters
-    public char[][] getGrid() { return grid; }
+    public Node[][] getGrid() { return grid; }
     public int getRows() { return rows; }
     public int getCols() { return cols; }
-    public int getStartRow() { return startRow; }
-    public int getStartCol() { return startCol; }
-    public int getTargetRow() { return targetRow; }
-    public int getTargetCol() { return targetCol; }
+
+    public Node getStartNode() {
+        return startNode;
+    }
+
+    public void setStartNode(Node startNode) {
+        this.startNode = startNode;
+    }
+
+    public Node getEndNode() {
+        return endNode;
+    }
+
+    public void setEndNode(Node endNode) {
+        this.endNode = endNode;
+    }
 }
